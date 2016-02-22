@@ -1,0 +1,2 @@
+org.springframework.boot.autoconfigure.EnableAutoConfiguration=\
+com.bigdullrock.spring.boot.nifty.autoconfigure.NiftyAutoConfiguration
