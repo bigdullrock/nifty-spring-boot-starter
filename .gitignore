@@ -1,0 +1,11 @@
+
+/target/
+/test-output/
+/.classpath
+/.project
+/.settings/
+/.checkstyle
+/.pmd
+/.factorypath
+/maven-central-deploy.log
+/maven-central-deploy.sh~
