@@ -1,7 +1,6 @@
 
 #Spring boot starter for [Facebook's Nifty.](https://github.com/facebook/nifty)
-[![Build Status](https://travis-ci.org/bigdullrock/spring-boot-starter-nifty.svg?branch=master)](https://travis-ci.org/bigdullrock/spring-boot-starter-nifty)
-[ ![Download](https://api.bintray.com/packages/bigdullrock/maven/spring-boot-starter-nifty/images/download.svg) ](https://bintray.com/bigdullrock/maven/spring-boot-starter-nifty/_latestVersion)
+
 
 ## Features
 Auto-configures and run the embedded Nifty server with @NiftyHandler-enabled beans as part of spring-boot application.
@@ -9,14 +8,14 @@ Auto-configures and run the embedded Nifty server with @NiftyHandler-enabled bea
 ## Setup
 ```gradle
 dependencies {
-    compile('com.bigdullrock:spring-boot-starter-nifty:0.2.0')
+    compile('com.bigdullrock:spring-boot-starter-nifty:0.3.0')
 }
 ```
 ```xml
 <dependency>
     <groupId>com.bigdullrock</groupId>
     <artifactId>spring-boot-starter-nifty</artifactId>
-    <version>0.2.0</version>
+    <version>0.3.0</version>
     <scope>compile</scope>
 </dependency>
 ```
