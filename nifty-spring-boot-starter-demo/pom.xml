@@ -5,22 +5,22 @@
 
     <parent>
         <groupId>com.bigdullrock</groupId>
-        <artifactId>spring-boot-starter-nifty-parent</artifactId>
+        <artifactId>nifty-spring-boot-starter-parent</artifactId>
         <version>0.3.0</version>
         <relativePath>../pom.xml</relativePath>
     </parent>
 
-    <artifactId>spring-boot-starter-nifty-demo</artifactId>
+    <artifactId>nifty-spring-boot-starter-demo</artifactId>
     <packaging>jar</packaging>
 
-    <name>Spring Boot Starter Nifty Demo</name>
+    <name>Nifty Spring Boot Starter Demo</name>
 
     <dependencies>
 
         <!-- spring boot -->
         <dependency>
             <groupId>com.bigdullrock</groupId>
-            <artifactId>spring-boot-starter-nifty</artifactId>
+            <artifactId>nifty-spring-boot-starter</artifactId>
             <version>${project.version}</version>
         </dependency>
 

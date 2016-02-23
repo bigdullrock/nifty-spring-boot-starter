@@ -5,15 +5,15 @@
 
     <parent>
         <groupId>com.bigdullrock</groupId>
-        <artifactId>spring-boot-starter-nifty-parent</artifactId>
+        <artifactId>nifty-spring-boot-starter-parent</artifactId>
         <version>0.3.0</version>
         <relativePath>../pom.xml</relativePath>
     </parent>
 
-    <artifactId>spring-boot-starter-nifty</artifactId>
+    <artifactId>nifty-spring-boot-starter</artifactId>
     <packaging>jar</packaging>
 
-    <name>Spring Boot Starter Nifty</name>
+    <name>Nifty Spring Boot Starter</name>
     <description>Spring Boot Starter for the Nifty Thift Library</description>
 
     <dependencies>

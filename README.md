@@ -8,13 +8,13 @@ Auto-configures and run the embedded Nifty server with @NiftyHandler-enabled bea
 ## Setup
 ```gradle
 dependencies {
-    compile('com.bigdullrock:spring-boot-starter-nifty:0.3.0')
+    compile('com.bigdullrock:nifty-spring-boot-starter:0.3.0')
 }
 ```
 ```xml
 <dependency>
     <groupId>com.bigdullrock</groupId>
-    <artifactId>spring-boot-starter-nifty</artifactId>
+    <artifactId>nifty-spring-boot-starter</artifactId>
     <version>0.3.0</version>
     <scope>compile</scope>
 </dependency>
@@ -31,7 +31,7 @@ dependencies {
 ```
 
 ## Show case
-In the 'spring-boot-starter-nifty-demo' project you can find fully functional example with integration test.
+In the 'nifty-spring-boot-starter-demo' project you can find fully functional example with integration test.
 The service definition from `.thrift` file looks like this :
 ```thrift
 namespace java com.bigdullrock.thrift

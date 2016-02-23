@@ -4,13 +4,13 @@
     <modelVersion>4.0.0</modelVersion>
 
     <groupId>com.bigdullrock</groupId>
-    <artifactId>spring-boot-starter-nifty-parent</artifactId>
+    <artifactId>nifty-spring-boot-starter-parent</artifactId>
     <version>0.3.0</version>
     <packaging>pom</packaging>
 
-    <name>Spring Boot Starter Nifty</name>
+    <name>Nifty Spring Boot Starter</name>
     <description>Spring Boot Starter for the Nifty Thift Library</description>
-    <url>https://github.com/bigdullrock/spring-boot-starter-nifty</url>
+    <url>https://github.com/bigdullrock/nifty-spring-boot-starter</url>
 
     <organization>
         <name>Big Dull Rock</name>
@@ -53,14 +53,14 @@
     </properties>
 
     <scm>
-        <connection>scm:git:git@github.com:bigdullrock/spring-boot-starter-nifty.git</connection>
-        <url>scm:git:git@github.com:bigdullrock/spring-boot-starter-nifty.git</url>
-        <developerConnection>scm:git:git@github.com:bigdullrock/spring-boot-starter-nifty.git</developerConnection>
+        <connection>scm:git:git@github.com:bigdullrock/nifty-spring-boot-starter.git</connection>
+        <url>scm:git:git@github.com:bigdullrock/nifty-spring-boot-starter.git</url>
+        <developerConnection>scm:git:git@github.com:bigdullrock/nifty-spring-boot-starter.git</developerConnection>
     </scm>
 
     <modules>
-        <module>spring-boot-starter-nifty</module>
-        <module>spring-boot-starter-nifty-demo</module>
+        <module>nifty-spring-boot-starter</module>
+        <module>nifty-spring-boot-starter-demo</module>
     </modules>
 
     <dependencyManagement>
