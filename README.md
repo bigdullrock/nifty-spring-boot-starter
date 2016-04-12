@@ -15,7 +15,7 @@ dependencies {
 <dependency>
     <groupId>com.bigdullrock</groupId>
     <artifactId>nifty-spring-boot-starter</artifactId>
-    <version>0.3.0</version>
+    <version>0.4.0</version>
     <scope>compile</scope>
 </dependency>
 ```
@@ -30,7 +30,7 @@ dependencies {
     port : 5000
 ```
 
-## Show case
+## Showcase
 In the 'nifty-spring-boot-starter-demo' project you can find fully functional example with integration test.
 The service definition from `.thrift` file looks like this :
 ```thrift
@@ -65,7 +65,7 @@ import com.bigdullrock.thrift.HelloRequest;
 import org.apache.thrift.TException;
 
 @NiftyHandler
-public static class GreeterService implements Greeter.Iface {
+public class GreeterService implements Greeter.Iface {
 
   @Override
   public HelloReply sayHello(HelloRequest req) throws TException {

@@ -20,6 +20,10 @@ import org.springframework.boot.ApplicationRunner;
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.annotation.Configuration;
 
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
+
 @Configuration
 public class NiftyServerRunner implements ApplicationRunner, DisposableBean {
 
@@ -63,8 +67,9 @@ public class NiftyServerRunner implements ApplicationRunner, DisposableBean {
   }
 
   @SuppressWarnings({"unchecked", "rawtypes"})
-  private TProcessor getTProcessor(final Object niftyHandler) throws NoSuchMethodException {
-    Class<?>[] handlerInterfaces = niftyHandler.getClass().getInterfaces();
+  private TProcessor getTProcessor(final Object niftyHandler)
+      throws NoSuchMethodException, ClassNotFoundException {
+    List<Class<?>> handlerInterfaces = findAllInterfaces(niftyHandler.getClass());
     Class ifaceClass = null;
     Class<TProcessor> processorClass = null;
 
@@ -87,10 +92,22 @@ public class NiftyServerRunner implements ApplicationRunner, DisposableBean {
       }
     }
     if (ifaceClass == null) {
-      throw new IllegalStateException("No Thrift Ifaces found on handler");
+      throw new IllegalStateException("No Thrift Ifaces found on handler: " + ifaceClass);
     }
     return BeanUtils.instantiateClass(processorClass.getConstructor(ifaceClass),
         wrapHandler(ifaceClass, niftyHandler));
+  }
+
+  /**
+   * proxyTargetClass = true might be set, so we have to work harder to get the Thrift Iface.
+   */
+  private List<Class<?>> findAllInterfaces(Class<?> handlerClass) throws ClassNotFoundException {
+    List<Class<?>> handlerInterfaces = new ArrayList<>();
+    handlerInterfaces.addAll(Arrays.asList(handlerClass.getInterfaces()));
+    handlerInterfaces.addAll(Arrays
+        .asList(Class.forName(handlerClass.getSuperclass().getName()).getInterfaces()));
+    handlerInterfaces.add(handlerClass.getSuperclass());
+    return handlerInterfaces;
   }
 
   @SuppressWarnings("unchecked")
