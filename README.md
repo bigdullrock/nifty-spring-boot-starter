@@ -77,24 +77,25 @@ public class GreeterService implements Greeter.Iface {
 ```java
 package com.bigdullrock.spring.boot.nifty.demo;
 
-import com.bigdullrock.spring.boot.nifty.NiftyHandler;
 import com.bigdullrock.thrift.Greeter;
 import com.bigdullrock.thrift.HelloReply;
 import com.bigdullrock.thrift.HelloRequest;
 
-import org.apache.thrift.TException;
+import org.apache.thrift.protocol.TBinaryProtocol;
+import org.apache.thrift.protocol.TMultiplexedProtocol;
+import org.apache.thrift.transport.TSocket;
 
 public class SampleClient {
 
   public static void main(final String[] args) throws Exception {
-    TSocket transport = new TSocket("localhost", PORT);
+    TSocket transport = new TSocket("localhost", 8000);
     transport.open();
     TBinaryProtocol protocol = new TBinaryProtocol(transport);
     TMultiplexedProtocol mp = new TMultiplexedProtocol(protocol, "greeterService");
-    GreeterService.Client client = new GreeterService.Client(mp);
+    Greeter.Client client = new Greeter.Client(mp);
     HelloRequest req = new HelloRequest("world");
-    GreeterReply rep = client.sayHello(req);
-    System.out.println("Message: " + rep.getMessage());
+    HelloReply rep = client.sayHello(req);
+    System.out.println("Message: " + rep.message);
   }
 
 }
