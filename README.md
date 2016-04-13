@@ -15,7 +15,7 @@ dependencies {
 <dependency>
     <groupId>com.bigdullrock</groupId>
     <artifactId>nifty-spring-boot-starter</artifactId>
-    <version>0.4.0</version>
+    <version>0.4.1</version>
     <scope>compile</scope>
 </dependency>
 ```
@@ -71,6 +71,32 @@ public class GreeterService implements Greeter.Iface {
   public HelloReply sayHello(HelloRequest req) throws TException {
     return new HelloReply("Hello " + req.getName());
   }
+}
+```
+
+```java
+package com.bigdullrock.spring.boot.nifty.demo;
+
+import com.bigdullrock.spring.boot.nifty.NiftyHandler;
+import com.bigdullrock.thrift.Greeter;
+import com.bigdullrock.thrift.HelloReply;
+import com.bigdullrock.thrift.HelloRequest;
+
+import org.apache.thrift.TException;
+
+public class SampleClient {
+
+  public static void main(final String[] args) throws Exception {
+    TSocket transport = new TSocket("localhost", PORT);
+    transport.open();
+    TBinaryProtocol protocol = new TBinaryProtocol(transport);
+    TMultiplexedProtocol mp = new TMultiplexedProtocol(protocol, "greeterService");
+    GreeterService.Client client = new GreeterService.Client(mp);
+    HelloRequest req = new HelloRequest("world");
+    GreeterReply rep = client.sayHello(req);
+    System.out.println("Message: " + rep.getMessage());
+  }
+
 }
 ```
 

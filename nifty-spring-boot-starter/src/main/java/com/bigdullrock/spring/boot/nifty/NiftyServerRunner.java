@@ -23,6 +23,7 @@ import org.springframework.context.annotation.Configuration;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
+import java.util.Map;
 
 @Configuration
 public class NiftyServerRunner implements ApplicationRunner, DisposableBean {
@@ -45,10 +46,11 @@ public class NiftyServerRunner implements ApplicationRunner, DisposableBean {
   public void run(final ApplicationArguments args) throws Exception {
     TMultiplexedProcessor multiplexedProcessor = new TMultiplexedProcessor();
 
-    for (Object niftyHandler : applicationContext.getBeansWithAnnotation(NiftyHandler.class)
-        .values()) {
-      String processorName = niftyHandler.getClass().getSimpleName();
-      TProcessor tproc = getTProcessor(niftyHandler);
+    for (Map.Entry<String, Object> niftyHandler : applicationContext
+        .getBeansWithAnnotation(NiftyHandler.class)
+        .entrySet()) {
+      String processorName = niftyHandler.getKey();
+      TProcessor tproc = getTProcessor(niftyHandler.getValue());
       LOG.info("Registering Nifty processor {}: {}", processorName, tproc);
       multiplexedProcessor.registerProcessor(processorName, tproc);
     }
@@ -59,7 +61,7 @@ public class NiftyServerRunner implements ApplicationRunner, DisposableBean {
       thriftServerDefBuilder.listen(niftyServerProperties.getPort());
     }
     ThriftServerDef serverDef = thriftServerDefBuilder.build();
-    LOG.info("Starting Nifty Server on port {}", niftyServerProperties.getPort());
+    LOG.info("Starting Nifty Server on port {}", serverDef.getServerPort());
     if (nettyServer == null) {
       nettyServer = new NettyServerTransport(serverDef);
     }
