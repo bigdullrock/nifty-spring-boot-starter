@@ -32,7 +32,7 @@ public class GreeterServiceTest {
     TSocket transport = new TSocket("localhost", port);
     transport.open();
     TMultiplexedProtocol mp =
-        new TMultiplexedProtocol(new TBinaryProtocol(transport), "greeterService");
+        new TMultiplexedProtocol(new TBinaryProtocol(transport), "Greeter");
     client = new Greeter.Client(mp);
   }
 

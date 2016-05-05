@@ -1,6 +1,5 @@
 package com.bigdullrock.spring.boot.nifty.aop;
 
-import org.apache.thrift.TApplicationException;
 import org.apache.thrift.TException;
 import org.springframework.aop.ThrowsAdvice;
 
@@ -13,6 +12,6 @@ public class ExceptionsNiftyMethodInterceptor implements ThrowsAdvice {
     if (ex instanceof TException) {
       throw ex;
     }
-    throw new TApplicationException(TApplicationException.INTERNAL_ERROR, ex.getMessage());
+    throw new TException(ex.getMessage(), ex);
   }
 }

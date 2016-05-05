@@ -8,14 +8,14 @@ Auto-configures and run the embedded Nifty server with @NiftyHandler-enabled bea
 ## Setup
 ```gradle
 dependencies {
-    compile('com.bigdullrock:nifty-spring-boot-starter:0.3.0')
+    compile('com.bigdullrock:nifty-spring-boot-starter:0.6.0')
 }
 ```
 ```xml
 <dependency>
     <groupId>com.bigdullrock</groupId>
     <artifactId>nifty-spring-boot-starter</artifactId>
-    <version>0.4.2</version>
+    <version>0.6.0</version>
     <scope>compile</scope>
 </dependency>
 ```
@@ -91,7 +91,7 @@ public class SampleClient {
     TSocket transport = new TSocket("localhost", 8000);
     transport.open();
     TBinaryProtocol protocol = new TBinaryProtocol(transport);
-    TMultiplexedProtocol mp = new TMultiplexedProtocol(protocol, "greeterService");
+    TMultiplexedProtocol mp = new TMultiplexedProtocol(protocol, "Greeter");
     Greeter.Client client = new Greeter.Client(mp);
     HelloRequest req = new HelloRequest("world");
     HelloReply rep = client.sayHello(req);

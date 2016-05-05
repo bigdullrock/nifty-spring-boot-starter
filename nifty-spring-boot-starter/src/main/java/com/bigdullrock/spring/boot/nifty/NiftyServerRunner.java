@@ -12,6 +12,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.aop.framework.ProxyFactory;
 import org.springframework.aop.target.SingletonTargetSource;
+import org.springframework.beans.BeanInstantiationException;
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.DisposableBean;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -22,6 +23,7 @@ import org.springframework.context.annotation.Configuration;
 
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -42,6 +44,7 @@ public class NiftyServerRunner implements ApplicationRunner, DisposableBean {
 
   private NettyServerTransport nettyServer;
 
+  @SuppressWarnings({"unchecked", "rawtypes"})
   @Override
   public void run(final ApplicationArguments args) throws Exception {
     TMultiplexedProcessor multiplexedProcessor = new TMultiplexedProcessor();
@@ -49,8 +52,17 @@ public class NiftyServerRunner implements ApplicationRunner, DisposableBean {
     for (Map.Entry<String, Object> niftyHandler : applicationContext
         .getBeansWithAnnotation(NiftyHandler.class)
         .entrySet()) {
-      String processorName = niftyHandler.getKey();
-      TProcessor tproc = getTProcessor(niftyHandler.getValue());
+      List<Class<?>> handlerInterfaces = findAllInterfaces(niftyHandler.getValue().getClass());
+
+      Map<String, Class<?>> classes =
+          getInterfaceAndProcessor(handlerInterfaces);
+
+      Class ifaceClass = classes.get("ifaceClass");
+      Class processorClass = classes.get("processorClass");
+      Object wrappedHandler = wrapHandler(ifaceClass, niftyHandler.getValue());
+
+      TProcessor tproc = createTProcessor(ifaceClass, processorClass, wrappedHandler);
+      String processorName = ifaceClass.getEnclosingClass().getSimpleName();
       LOG.info("Registering Nifty processor {}: {}", processorName, tproc);
       multiplexedProcessor.registerProcessor(processorName, tproc);
     }
@@ -69,9 +81,9 @@ public class NiftyServerRunner implements ApplicationRunner, DisposableBean {
   }
 
   @SuppressWarnings({"unchecked", "rawtypes"})
-  private TProcessor getTProcessor(final Object niftyHandler)
-      throws NoSuchMethodException, ClassNotFoundException {
-    List<Class<?>> handlerInterfaces = findAllInterfaces(niftyHandler.getClass());
+  private Map<String, Class<?>> getInterfaceAndProcessor(final List<Class<?>> handlerInterfaces)
+          throws NoSuchMethodException, ClassNotFoundException {
+    Map<String, Class<?>> classes = new HashMap<>();
     Class ifaceClass = null;
     Class<TProcessor> processorClass = null;
 
@@ -94,10 +106,17 @@ public class NiftyServerRunner implements ApplicationRunner, DisposableBean {
       }
     }
     if (ifaceClass == null) {
-      throw new IllegalStateException("No Thrift Ifaces found on handler: " + ifaceClass);
+      throw new IllegalStateException(
+          "No Thrift Ifaces found on handler: " + ifaceClass);
     }
-    return BeanUtils.instantiateClass(processorClass.getConstructor(ifaceClass),
-        wrapHandler(ifaceClass, niftyHandler));
+    classes.put("ifaceClass", ifaceClass);
+    classes.put("processorClass", processorClass);
+    return classes;
+  }
+
+  private <T> TProcessor createTProcessor(Class<?> iFaceClass, Class<TProcessor> processorClass, T wrappedHandler)
+      throws BeanInstantiationException, NoSuchMethodException, SecurityException {
+    return BeanUtils.instantiateClass(processorClass.getConstructor(iFaceClass), wrappedHandler);
   }
 
   /**
