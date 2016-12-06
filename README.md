@@ -15,7 +15,7 @@ dependencies {
 <dependency>
     <groupId>com.bigdullrock</groupId>
     <artifactId>nifty-spring-boot-starter</artifactId>
-    <version>0.6.0</version>
+    <version>0.7.0</version>
     <scope>compile</scope>
 </dependency>
 ```
