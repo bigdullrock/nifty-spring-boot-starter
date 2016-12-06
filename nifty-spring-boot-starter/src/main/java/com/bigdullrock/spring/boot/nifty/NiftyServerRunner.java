@@ -1,10 +1,6 @@
 package com.bigdullrock.spring.boot.nifty;
 
-import com.bigdullrock.spring.boot.nifty.autoconfigure.NiftyAutoConfiguration.NiftyConfigurer;
-import com.bigdullrock.spring.boot.nifty.autoconfigure.NiftyServerProperties;
-import com.facebook.nifty.core.NettyServerTransport;
-import com.facebook.nifty.core.ThriftServerDef;
-import com.facebook.nifty.core.ThriftServerDefBuilder;
+import java.util.*;
 
 import org.apache.thrift.TMultiplexedProcessor;
 import org.apache.thrift.TProcessor;
@@ -21,11 +17,11 @@ import org.springframework.boot.ApplicationRunner;
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.annotation.Configuration;
 
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
+import com.bigdullrock.spring.boot.nifty.autoconfigure.NiftyAutoConfiguration.NiftyConfigurer;
+import com.bigdullrock.spring.boot.nifty.autoconfigure.NiftyServerProperties;
+import com.facebook.nifty.core.NettyServerTransport;
+import com.facebook.nifty.core.ThriftServerDef;
+import com.facebook.nifty.core.ThriftServerDefBuilder;
 
 @Configuration
 public class NiftyServerRunner implements ApplicationRunner, DisposableBean {
@@ -69,8 +65,11 @@ public class NiftyServerRunner implements ApplicationRunner, DisposableBean {
 
     ThriftServerDefBuilder thriftServerDefBuilder =
         new ThriftServerDefBuilder().withProcessor(multiplexedProcessor);
-    if (niftyServerProperties != null && niftyServerProperties.getPort() != null) {
-      thriftServerDefBuilder.listen(niftyServerProperties.getPort());
+    if (niftyServerProperties != null) {
+      if (niftyServerProperties.getPort() != null) {
+        thriftServerDefBuilder.listen(niftyServerProperties.getPort());
+      }
+      thriftServerDefBuilder.protocol(niftyServerProperties.getProtocolType().getProtocolFactory());
     }
     ThriftServerDef serverDef = thriftServerDefBuilder.build();
     LOG.info("Starting Nifty Server on port {}", serverDef.getServerPort());
