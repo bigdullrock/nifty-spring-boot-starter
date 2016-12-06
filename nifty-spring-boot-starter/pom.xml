@@ -13,8 +13,8 @@
     <artifactId>nifty-spring-boot-starter</artifactId>
     <packaging>jar</packaging>
 
-    <name>Nifty Spring Boot Starter</name>
-    <description>Spring Boot Starter for the Nifty Thift Library</description>
+    <name>Nifty Spring Boot Starter Core</name>
+    <description>Spring Boot Starter for the Nifty Thrift Library</description>
 
     <dependencies>
 
@@ -52,7 +52,7 @@
         <dependency>
             <groupId>io.netty</groupId>
             <artifactId>netty</artifactId>
-            <scope>runtime</scope>
+            <scope>compile</scope>
         </dependency>
 
         <!-- logging -->

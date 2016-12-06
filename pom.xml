@@ -9,7 +9,7 @@
     <packaging>pom</packaging>
 
     <name>Nifty Spring Boot Starter</name>
-    <description>Spring Boot Starter for the Nifty Thift Library</description>
+    <description>Spring Boot Starter for the Nifty Thrift Library</description>
     <url>https://github.com/bigdullrock/nifty-spring-boot-starter</url>
 
     <organization>
