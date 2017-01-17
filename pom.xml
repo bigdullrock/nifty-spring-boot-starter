@@ -5,7 +5,7 @@
 
     <groupId>com.bigdullrock</groupId>
     <artifactId>nifty-spring-boot-starter-parent</artifactId>
-    <version>0.7.0</version>
+    <version>0.8.0</version>
     <packaging>pom</packaging>
 
     <name>Nifty Spring Boot Starter</name>
@@ -43,13 +43,15 @@
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
         <project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
         <java.version>1.7</java.version>
-        <spring.boot.version>1.4.0.RELEASE</spring.boot.version>
-        <hibernate.validator.version>5.2.4.Final</hibernate.validator.version>
+        <spring.boot.version>1.4.3.RELEASE</spring.boot.version>
+        <hibernate.validator.version>5.3.4.Final</hibernate.validator.version>
+        <javax.el.version>2.2.5</javax.el.version>
+        <glassfish.el.version>2.2.5</glassfish.el.version>
         <libthrift.version>0.9.3</libthrift.version>
-        <nifty.version>0.22.0</nifty.version>
+        <nifty.version>0.23.0</nifty.version>
         <netty.version>3.10.6.Final</netty.version>
-        <slf4j.version>1.7.16</slf4j.version>
-        <spring.test.version>4.3.3.RELEASE</spring.test.version>
+        <slf4j.version>1.7.22</slf4j.version>
+        <spring.test.version>4.3.5.RELEASE</spring.test.version>
         <junit.version>4.12</junit.version>
     </properties>
 
@@ -78,10 +80,22 @@
                 <artifactId>spring-boot-configuration-processor</artifactId>
                 <version>${spring.boot.version}</version>
             </dependency>
+
+            <!-- validator -->
             <dependency>
                 <groupId>org.hibernate</groupId>
                 <artifactId>hibernate-validator</artifactId>
                 <version>${hibernate.validator.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>javax.el</groupId>
+                <artifactId>javax.el-api</artifactId>
+                <version>${javax.el.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>org.glassfish.web</groupId>
+                <artifactId>javax.el</artifactId>
+                <version>${glassfish.el.version}</version>
             </dependency>
 
             <!-- thrift -->

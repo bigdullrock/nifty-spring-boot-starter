@@ -8,14 +8,14 @@ Auto-configures and run the embedded Nifty server with @NiftyHandler-enabled bea
 ## Setup
 ```gradle
 dependencies {
-    compile('com.bigdullrock:nifty-spring-boot-starter:0.6.0')
+    compile('com.bigdullrock:nifty-spring-boot-starter:0.8.0')
 }
 ```
 ```xml
 <dependency>
     <groupId>com.bigdullrock</groupId>
     <artifactId>nifty-spring-boot-starter</artifactId>
-    <version>0.7.0</version>
+    <version>0.8.0</version>
     <scope>compile</scope>
 </dependency>
 ```

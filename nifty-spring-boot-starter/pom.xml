@@ -6,7 +6,7 @@
     <parent>
         <groupId>com.bigdullrock</groupId>
         <artifactId>nifty-spring-boot-starter-parent</artifactId>
-        <version>0.7.0</version>
+        <version>0.8.0</version>
         <relativePath>../pom.xml</relativePath>
     </parent>
 
@@ -30,10 +30,22 @@
             <scope>compile</scope>
             <optional>true</optional>
         </dependency>
+
+        <!-- validator -->
         <dependency>
             <groupId>org.hibernate</groupId>
             <artifactId>hibernate-validator</artifactId>
             <scope>compile</scope>
+        </dependency>
+        <dependency>
+            <groupId>javax.el</groupId>
+            <artifactId>javax.el-api</artifactId>
+            <scope>runtime</scope>
+        </dependency>
+        <dependency>
+            <groupId>org.glassfish.web</groupId>
+            <artifactId>javax.el</artifactId>
+            <scope>runtime</scope>
         </dependency>
 
         <!-- thrift -->
